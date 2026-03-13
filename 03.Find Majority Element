@@ -1,0 +1,26 @@
+Concept: Boyer-Moore Voting Algorithm
+
+Example
+
+Input: 2 2 1 1 1 2 2
+Output: 2
+
+----------------------------------------------------------------------------------------------------------------------
+
+def majorityElement(nums):
+    count = 0
+    candidate = None
+
+    for num in nums:
+        if count == 0:
+            candidate = num
+
+        count += (1 if num == candidate else -1)
+
+    return candidate
+
+
+# ===== MAIN PROGRAM =====
+nums = list(map(int, input("Enter numbers: ").split()))
+
+print("Majority element:", majorityElement(nums))
