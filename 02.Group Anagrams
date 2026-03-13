@@ -1,0 +1,31 @@
+Concept: Hash Map + Sorting
+
+Example
+
+Input: ["eat","tea","tan","ate","nat","bat"]
+
+
+Output:-[['eat','tea','ate'], ['tan','nat'], ['bat']]
+---------------------------------------------------------------------------------------------------------------------
+
+def groupAnagrams(words):
+    anagrams = {}
+
+    for word in words:
+        key = ''.join(sorted(word))
+
+        if key not in anagrams:
+            anagrams[key] = []
+
+        anagrams[key].append(word)
+
+    return list(anagrams.values())
+
+
+# ===== MAIN PROGRAM =====
+words = input("Enter words separated by space: ").split()
+
+result = groupAnagrams(words)
+
+print("Grouped anagrams:", result)
+
