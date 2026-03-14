@@ -1,0 +1,34 @@
+Concept: Hash Map
+Find two numbers in an array that add up to a target.
+
+Example
+
+Input: 2 7 11 15
+Target: 9
+Output: [0,1]
+-------------------------------------------------------------------------------------------------------------------
+
+def twoSum(nums, target):
+    num_map = {}
+
+    for i, num in enumerate(nums):
+        complement = target - num
+
+        if complement in num_map:
+            return [num_map[complement], i]
+
+        num_map[num] = i
+
+    return []
+
+
+# ===== MAIN PROGRAM =====
+nums = list(map(int, input("Enter numbers: ").split()))
+target = int(input("Enter target: "))
+
+result = twoSum(nums, target)
+
+print("Indices:", result)
+
+
+
