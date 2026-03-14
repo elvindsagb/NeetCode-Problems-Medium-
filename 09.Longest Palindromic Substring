@@ -1,0 +1,40 @@
+Concept: Expand Around Center
+
+Example
+
+Input: babad
+Output: bab or aba
+
+
+------------------------------------------------------------------------------------------------------------
+
+def longestPalindrome(s):
+    res = ""
+    res_len = 0
+
+    for i in range(len(s)):
+
+        l = r = i
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            if r - l + 1 > res_len:
+                res = s[l:r+1]
+                res_len = r - l + 1
+            l -= 1
+            r += 1
+
+        l = i
+        r = i + 1
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            if r - l + 1 > res_len:
+                res = s[l:r+1]
+                res_len = r - l + 1
+            l -= 1
+            r += 1
+
+    return res
+
+
+# ===== MAIN PROGRAM =====
+text = input("Enter a string: ")
+
+print("Longest palindrome:", longestPalindrome(text))
