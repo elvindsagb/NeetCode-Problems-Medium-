@@ -1,0 +1,31 @@
+Concept: Stack
+
+Example
+
+Input: {[()]}
+Output: Valid
+
+--------------------------------------------------------------------------------------------------------------
+
+def isValid(s):
+    stack = []
+    pairs = {')': '(', '}': '{', ']': '['}
+
+    for char in s:
+        if char in "({[":
+            stack.append(char)
+        else:
+            if not stack or stack[-1] != pairs.get(char):
+                return False
+            stack.pop()
+
+    return len(stack) == 0
+
+
+# ===== MAIN PROGRAM =====
+text = input("Enter parentheses string: ")
+
+if isValid(text):
+    print("Valid parentheses")
+else:
+    print("Invalid parentheses")
