@@ -1,0 +1,27 @@
+Concept: Stack
+
+Example
+
+Input: 4 5 2 25
+Output: 5 25 25 -1
+
+------------------------------------------------------------------------------------------------
+
+def nextGreaterElement(nums):
+    stack = []
+    result = [-1] * len(nums)
+
+    for i in range(len(nums)):
+        while stack and nums[i] > nums[stack[-1]]:
+            index = stack.pop()
+            result[index] = nums[i]
+
+        stack.append(i)
+
+    return result
+
+
+# ===== MAIN PROGRAM =====
+nums = list(map(int, input("Enter numbers: ").split()))
+
+print("Next greater elements:", nextGreaterElement(nums))
