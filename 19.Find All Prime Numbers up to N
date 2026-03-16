@@ -1,0 +1,30 @@
+Concept: Sieve of Eratosthenes
+
+Example
+
+Input: 20
+Output: 2 3 5 7 11 13 17 19
+
+--------------------------------------------------------------------------------------------------------
+
+def sieve(n):
+    prime = [True] * (n + 1)
+    prime[0] = prime[1] = False
+
+    for i in range(2, int(n ** 0.5) + 1):
+        if prime[i]:
+            for j in range(i * i, n + 1, i):
+                prime[j] = False
+
+    result = []
+    for i in range(2, n + 1):
+        if prime[i]:
+            result.append(i)
+
+    return result
+
+
+# ===== MAIN PROGRAM =====
+n = int(input("Enter a number: "))
+
+print("Prime numbers:", sieve(n))
