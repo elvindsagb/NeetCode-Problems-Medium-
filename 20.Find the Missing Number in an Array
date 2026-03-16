@@ -1,0 +1,21 @@
+Concept: Mathematical Formula
+
+Example
+
+Input: 0 1 3 4
+Output: 2
+
+------------------------------------------------------------------------------------------------------------------------------------
+
+def findMissing(nums):
+    n = len(nums)
+    expected_sum = n * (n + 1) // 2
+    actual_sum = sum(nums)
+
+    return expected_sum - actual_sum
+
+
+# ===== MAIN PROGRAM =====
+nums = list(map(int, input("Enter numbers (0 to n with one missing): ").split()))
+
+print("Missing number:", findMissing(nums))
