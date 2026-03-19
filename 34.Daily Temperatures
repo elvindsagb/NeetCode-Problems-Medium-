@@ -1,0 +1,27 @@
+Concept: Monotonic Stack
+
+Example
+
+Input: 73 74 75 71 69 72 76 73
+Output: 1 1 4 2 1 1 0 0
+
+---------------------------------------------------------------------------------------------------
+
+def dailyTemperatures(temps):
+    result = [0] * len(temps)
+    stack = []
+
+    for i in range(len(temps)):
+        while stack and temps[i] > temps[stack[-1]]:
+            index = stack.pop()
+            result[index] = i - index
+
+        stack.append(i)
+
+    return result
+
+
+# ===== MAIN PROGRAM =====
+temps = list(map(int, input("Enter temperatures: ").split()))
+
+print("Days to wait:", dailyTemperatures(temps))
