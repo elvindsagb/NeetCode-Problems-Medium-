@@ -1,0 +1,53 @@
+Concept: DFS (Graph Traversal)
+
+Example
+
+Grid:
+
+1 1 0
+0 1 0
+1 0 1
+
+Output: 3
+
+
+---------------------------------------------------------------------------------------------------------------------
+
+def numIslands(grid):
+    if not grid:
+        return 0
+
+    rows, cols = len(grid), len(grid[0])
+
+    def dfs(r, c):
+        if r < 0 or c < 0 or r >= rows or c >= cols or grid[r][c] == '0':
+            return
+
+        grid[r][c] = '0'
+
+        dfs(r+1, c)
+        dfs(r-1, c)
+        dfs(r, c+1)
+        dfs(r, c-1)
+
+    count = 0
+
+    for r in range(rows):
+        for c in range(cols):
+            if grid[r][c] == '1':
+                dfs(r, c)
+                count += 1
+
+    return count
+
+
+# ===== MAIN PROGRAM =====
+r = int(input("Enter rows: "))
+c = int(input("Enter cols: "))
+
+grid = []
+print("Enter grid (0/1):")
+for _ in range(r):
+    grid.append(input().split())
+
+print("Number of islands:", numIslands(grid))
