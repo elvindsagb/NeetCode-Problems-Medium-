@@ -1,0 +1,33 @@
+Concept: Dynamic Programming
+
+Example
+
+Input: 1 5 11 5
+Output: True
+
+-------------------------------------------------------------------------------------------------------------
+
+def canPartition(nums):
+    total = sum(nums)
+
+    if total % 2 != 0:
+        return False
+
+    target = total // 2
+    dp = set([0])
+
+    for num in nums:
+        new_dp = dp.copy()
+        for t in dp:
+            if t + num == target:
+                return True
+            new_dp.add(t + num)
+        dp = new_dp
+
+    return target in dp
+
+
+# ===== MAIN PROGRAM =====
+nums = list(map(int, input("Enter numbers: ").split()))
+
+print("Can partition:", canPartition(nums))
