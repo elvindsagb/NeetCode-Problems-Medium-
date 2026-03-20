@@ -1,0 +1,27 @@
+Concept: Binary Search
+
+Example
+
+Input: 1 2 3 1
+Output: 2 (index of peak)
+
+------------------------------------------------------------------------------------------------------
+
+def findPeak(nums):
+    left, right = 0, len(nums) - 1
+
+    while left < right:
+        mid = (left + right) // 2
+
+        if nums[mid] < nums[mid + 1]:
+            left = mid + 1
+        else:
+            right = mid
+
+    return left
+
+
+# ===== MAIN PROGRAM =====
+nums = list(map(int, input("Enter numbers: ").split()))
+
+print("Peak index:", findPeak(nums))
