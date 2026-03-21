@@ -1,0 +1,48 @@
+Concept: Graph + Cycle Detection (DFS)
+
+-----------------------------------------------------------------------------------------------------------------------------
+
+
+def canFinish(numCourses, prerequisites):
+    graph = {i: [] for i in range(numCourses)}
+
+    for a, b in prerequisites:
+        graph[a].append(b)
+
+    visiting = set()
+    visited = set()
+
+    def dfs(course):
+        if course in visiting:
+            return False
+        if course in visited:
+            return True
+
+        visiting.add(course)
+
+        for pre in graph[course]:
+            if not dfs(pre):
+                return False
+
+        visiting.remove(course)
+        visited.add(course)
+
+        return True
+
+    for course in range(numCourses):
+        if not dfs(course):
+            return False
+
+    return True
+
+
+# ===== MAIN PROGRAM =====
+n = int(input("Enter number of courses: "))
+m = int(input("Enter number of prerequisite pairs: "))
+
+prereq = []
+print("Enter pairs (a b):")
+for _ in range(m):
+    prereq.append(list(map(int, input().split())))
+
+print("Can finish courses:", canFinish(n, prereq))
