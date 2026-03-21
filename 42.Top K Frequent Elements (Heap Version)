@@ -1,0 +1,29 @@
+Top K Frequent Elements (Heap Version)
+
+
+-------------------------------------------------------------------------------------
+
+import heapq
+
+def topKFrequent(nums, k):
+    freq = {}
+
+    for num in nums:
+        freq[num] = freq.get(num, 0) + 1
+
+    heap = []
+    for num, count in freq.items():
+        heapq.heappush(heap, (-count, num))
+
+    result = []
+    for _ in range(k):
+        result.append(heapq.heappop(heap)[1])
+
+    return result
+
+
+# ===== MAIN PROGRAM =====
+nums = list(map(int, input("Enter numbers: ").split()))
+k = int(input("Enter k: "))
+
+print("Top k elements:", topKFrequent(nums, k))
