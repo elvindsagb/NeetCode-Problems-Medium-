@@ -1,0 +1,25 @@
+Concept: Greedy
+
+Example
+
+Input: 2 3 1 1 4
+Output: True
+
+
+----------------------------------------------------------------------------------------
+
+def canJump(nums):
+    max_reach = 0
+
+    for i in range(len(nums)):
+        if i > max_reach:
+            return False
+        max_reach = max(max_reach, i + nums[i])
+
+    return True
+
+
+# ===== MAIN PROGRAM =====
+nums = list(map(int, input("Enter numbers: ").split()))
+
+print("Can reach end:", canJump(nums))
