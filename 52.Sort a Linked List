@@ -1,0 +1,67 @@
+Sort a Linked List
+
+------------------------------------------------------------------------------------------
+
+class ListNode:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+
+def merge(l1, l2):
+    dummy = ListNode(0)
+    tail = dummy
+
+    while l1 and l2:
+        if l1.val < l2.val:
+            tail.next = l1
+            l1 = l1.next
+        else:
+            tail.next = l2
+            l2 = l2.next
+        tail = tail.next
+
+    tail.next = l1 or l2
+    return dummy.next
+
+
+def sortList(head):
+    if not head or not head.next:
+        return head
+
+    slow = fast = head
+    prev = None
+
+    while fast and fast.next:
+        prev = slow
+        slow = slow.next
+        fast = fast.next.next
+
+    prev.next = None
+
+    left = sortList(head)
+    right = sortList(slow)
+
+    return merge(left, right)
+
+
+def printList(head):
+    while head:
+        print(head.val, end=" -> ")
+        head = head.next
+    print("None")
+
+
+# ===== MAIN PROGRAM =====
+values = list(map(int, input("Enter linked list values: ").split()))
+
+head = None
+for val in reversed(values):
+    node = ListNode(val)
+    node.next = head
+    head = node
+
+head = sortList(head)
+
+print("Sorted list:")
+printList(head)
