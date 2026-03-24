@@ -1,0 +1,31 @@
+Concept: Heap
+
+----------------------------------------------------------------------------------------------------------
+
+import heapq
+
+def kClosest(points, k):
+    heap = []
+
+    for (x, y) in points:
+        dist = x*x + y*y
+        heapq.heappush(heap, (dist, [x, y]))
+
+    result = []
+    for _ in range(k):
+        result.append(heapq.heappop(heap)[1])
+
+    return result
+
+
+# ===== MAIN PROGRAM =====
+n = int(input("Enter number of points: "))
+points = []
+
+print("Enter points (x y):")
+for _ in range(n):
+    points.append(list(map(int, input().split())))
+
+k = int(input("Enter k: "))
+
+print("K closest points:", kClosest(points, k))
