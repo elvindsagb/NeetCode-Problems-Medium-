@@ -1,0 +1,33 @@
+Concept: Two Pointers
+
+Idea
+
+A celebrity is known by everyone but knows no one.
+
+---------------------------------------------------------------------------------------------------------------------------
+
+def findCelebrity(matrix):
+    n = len(matrix)
+    candidate = 0
+
+    for i in range(1, n):
+        if matrix[candidate][i] == 1:
+            candidate = i
+
+    for i in range(n):
+        if i != candidate:
+            if matrix[candidate][i] == 1 or matrix[i][candidate] == 0:
+                return -1
+
+    return candidate
+
+
+# ===== MAIN PROGRAM =====
+n = int(input("Enter number of people: "))
+matrix = []
+
+print("Enter matrix:")
+for _ in range(n):
+    matrix.append(list(map(int, input().split())))
+
+print("Celebrity index:", findCelebrity(matrix))
