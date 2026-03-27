@@ -1,0 +1,30 @@
+Concept: Stack
+
+Example
+
+Input: /a/./b/../../c/
+Output: /c
+
+
+-----------------------------------------------------------------------------------------------------
+
+def simplifyPath(path):
+    stack = []
+    parts = path.split('/')
+
+    for part in parts:
+        if part == "" or part == ".":
+            continue
+        elif part == "..":
+            if stack:
+                stack.pop()
+        else:
+            stack.append(part)
+
+    return "/" + "/".join(stack)
+
+
+# ===== MAIN PROGRAM =====
+path = input("Enter path: ")
+
+print("Simplified path:", simplifyPath(path))
