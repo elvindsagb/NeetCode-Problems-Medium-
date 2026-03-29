@@ -6,3 +6,25 @@ Input: 1 1 1, k = 2 → Output: 2
 
 -------------------------------------------------
 
+def subarraySum(nums, k):
+    prefix_sum = 0
+    count = 0
+    hashmap = {0: 1}
+
+    for num in nums:
+        prefix_sum += num
+
+        if prefix_sum - k in hashmap:
+            count += hashmap[prefix_sum - k]
+
+        hashmap[prefix_sum] = hashmap.get(prefix_sum, 0) + 1
+
+    return count
+
+
+# ===== MAIN PROGRAM =====
+nums = list(map(int, input("Enter numbers: ").split()))
+k = int(input("Enter target sum: "))
+
+print("Number of subarrays:", subarraySum(nums, k))
+
