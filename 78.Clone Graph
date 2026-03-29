@@ -1,3 +1,41 @@
 Clone Graph
 
 -------------------------
+
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.neighbors = []
+
+
+def cloneGraph(node):
+    visited = {}
+
+    def dfs(node):
+        if node in visited:
+            return visited[node]
+
+        copy = Node(node.val)
+        visited[node] = copy
+
+        for neighbor in node.neighbors:
+            copy.neighbors.append(dfs(neighbor))
+
+        return copy
+
+    return dfs(node)
+
+
+# ===== MAIN PROGRAM =====
+# Example graph (1 connected to 2 and 3)
+n1 = Node(1)
+n2 = Node(2)
+n3 = Node(3)
+
+n1.neighbors = [n2, n3]
+n2.neighbors = [n1]
+n3.neighbors = [n1]
+
+clone = cloneGraph(n1)
+
+print("Cloned node value:", clone.val)
