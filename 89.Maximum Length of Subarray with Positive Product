@@ -1,0 +1,27 @@
+Concept: DP / Greedy
+
+---------------------------------------------------------------------------------------
+
+def getMaxLen(nums):
+    pos = neg = 0
+    result = 0
+
+    for num in nums:
+        if num == 0:
+            pos = neg = 0
+        elif num > 0:
+            pos += 1
+            neg = neg + 1 if neg > 0 else 0
+        else:
+            pos, neg = (neg + 1 if neg > 0 else 0), pos + 1
+
+        result = max(result, pos)
+
+    return result
+
+
+# ===== MAIN PROGRAM =====
+nums = list(map(int, input("Enter numbers: ").split()))
+
+print("Max length:", getMaxLen(nums))
+
