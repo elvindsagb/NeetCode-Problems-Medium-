@@ -1,0 +1,41 @@
+Concept: BFS
+
+-----------------------------------------------------------------------------------
+
+from collections import deque
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+def rightSideView(root):
+    if not root:
+        return []
+
+    queue = deque([root])
+    result = []
+
+    while queue:
+        for i in range(len(queue)):
+            node = queue.popleft()
+
+            if i == 0:
+                result.append(node.val)
+
+            if node.right:
+                queue.append(node.right)
+            if node.left:
+                queue.append(node.left)
+
+    return result
+
+
+# ===== MAIN PROGRAM =====
+root = TreeNode(1)
+root.left = TreeNode(2)
+root.right = TreeNode(3)
+
+print("Right side view:", rightSideView(root))
