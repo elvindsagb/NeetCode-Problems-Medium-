@@ -1,0 +1,41 @@
+Concept: BFS + Indexing
+
+-------------------------------------------------------------------------------
+
+from collections import deque
+
+class TreeNode:
+    def __init__(self, val):
+        self.val = val
+        self.left = None
+        self.right = None
+
+
+def widthOfBinaryTree(root):
+    queue = deque([(root, 0)])
+    max_width = 0
+
+    while queue:
+        length = len(queue)
+        _, first = queue[0]
+
+        for i in range(length):
+            node, index = queue.popleft()
+
+            if node.left:
+                queue.append((node.left, 2 * index))
+            if node.right:
+                queue.append((node.right, 2 * index + 1))
+
+            if i == length - 1:
+                max_width = max(max_width, index - first + 1)
+
+    return max_width
+
+
+# ===== MAIN PROGRAM =====
+root = TreeNode(1)
+root.left = TreeNode(3)
+root.right = TreeNode(2)
+
+print("Max width:", widthOfBinaryTree(root))
