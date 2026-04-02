@@ -1,0 +1,23 @@
+Concept: HashMap + Heap / Sorting
+
+---------------------------------------------------------------------------------------------
+
+def frequencySort(s):
+    freq = {}
+
+    for char in s:
+        freq[char] = freq.get(char, 0) + 1
+
+    sorted_chars = sorted(freq.items(), key=lambda x: x[1], reverse=True)
+
+    result = ""
+    for char, count in sorted_chars:
+        result += char * count
+
+    return result
+
+
+# ===== MAIN PROGRAM =====
+text = input("Enter string: ")
+
+print("Sorted by frequency:", frequencySort(text))
